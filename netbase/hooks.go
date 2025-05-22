@@ -126,7 +126,7 @@ func (s *Server) OnMessagePublish(ctx context.Context, in *pb.MessagePublishRequ
 	}
 
 	// 将消息发布到RabbitMQ交换机，支持多个消费者订阅
-	err := publishToQueue("", data) // queueName参数已不使用，传空字符串
+	err := publishToQueue(data)
 	if err != nil {
 		log.Printf("发布消息到RabbitMQ失败: %v, topic: %s", err, in.Message.Topic)
 	} else {

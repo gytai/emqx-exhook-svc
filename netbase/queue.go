@@ -32,7 +32,7 @@ func getExchangeNameByTopic(topic string) string {
 }
 
 // 发布消息到RabbitMQ交换机
-func publishToQueue(queueName string, data *DeviceEventInfo) error {
+func publishToQueue(data *DeviceEventInfo) error {
 	if RabbitMQClient == nil {
 		return fmt.Errorf("RabbitMQ客户端未初始化")
 	}
