@@ -1,0 +1,29 @@
+package netbase
+
+import (
+	"context"
+	"emqx.io/grpc/exhook/kit"
+	"time"
+)
+
+var RedisDb *kit.RedisDB
+
+// SetDeviceEtoken key 是设备的时候为token， 是子设备的时候为设备编码
+func SetDeviceEtoken(key string, value any, duration time.Duration) error {
+	return RedisDb.Set(key, value, duration)
+}
+
+// GetDeviceEtoken value 是参数指针
+func GetDeviceEtoken(key string, value interface{}) error {
+	return RedisDb.Get(key, value)
+}
+
+// DelDeviceEtoken 删除指定的key
+func DelDeviceEtoken(key string) error {
+	return RedisDb.Del(context.Background(), key).Err()
+}
+
+func ExistsDeviceEtoken(key string) bool {
+	exists, _ := RedisDb.Exists(RedisDb.Context(), key).Result()
+	return exists == 1
+}
