@@ -20,6 +20,14 @@ type Config struct {
 		Password string `yaml:"password"`
 		DB       int    `yaml:"db"`
 	} `yaml:"redis"`
+
+	RabbitMQ struct {
+		Host     string `yaml:"host"`
+		Port     int    `yaml:"port"`
+		Username string `yaml:"username"`
+		Password string `yaml:"password"`
+		VHost    string `yaml:"vhost"`
+	} `yaml:"rabbitmq"`
 }
 
 // LoadConfig 从配置文件加载配置

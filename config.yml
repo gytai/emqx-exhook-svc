@@ -5,4 +5,11 @@ redis:
   host: 127.0.0.1
   port: 6379
   password: 123456
-  db: 0 
+  db: 0
+
+rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  username: guest
+  password: guest
+  vhost: / 

@@ -125,8 +125,13 @@ func (s *Server) OnMessagePublish(ctx context.Context, in *pb.MessagePublishRequ
 		Topic:      in.Message.Topic,
 	}
 
-	// todo 发送消息到消息队列
-	log.Println(data)
+	// 将消息发布到RabbitMQ交换机，支持多个消费者订阅
+	err := publishToQueue("", data) // queueName参数已不使用，传空字符串
+	if err != nil {
+		log.Printf("发布消息到RabbitMQ失败: %v, topic: %s", err, in.Message.Topic)
+	} else {
+		log.Printf("成功发布消息到RabbitMQ交换机, topic: %s", in.Message.Topic)
+	}
 
 	return reply, nil
 }
